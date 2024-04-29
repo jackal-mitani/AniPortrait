@@ -8,6 +8,8 @@ import numpy as np
 import cv2
 import random
 import torch
+import sys
+sys.path.append('/notebooks/AniPortrait')
 
 from diffusers import AutoencoderKL, DDIMScheduler
 from einops import repeat
@@ -142,6 +144,8 @@ def get_headpose_temp(input_video):
     pose_arr_smooth = smooth_pose_seq(pose_arr_interp)
     
     return pose_arr_smooth
+
+# 残りのコードは変更なし
 
 def audio2video(input_audio, ref_img, headpose_video=None, size=512, steps=25, length=60, seed=42, acc_flag=True):   
     fps = 30
@@ -410,14 +414,9 @@ title = r"""
 <h1>AniPortrait</h1>
 """
 
-description = r"""
-<b>Official 🤗 Gradio demo</b> for <a href='https://github.com/Zejun-Yang/AniPortrait' target='_blank'><b>AniPortrait: Audio-Driven Synthesis of Photorealistic Portrait Animations</b></a>.<br>
-"""
-
 with gr.Blocks() as demo:
     
     gr.Markdown(title)
-    gr.Markdown(description)
     
     with gr.Tab("Audio2video"):
         with gr.Row():
@@ -491,4 +490,4 @@ with gr.Blocks() as demo:
         outputs=[v2v_output_video, v2v_ref_img]
     )
     
-demo.launch()
+demo.launch(share=True)
