@@ -9,7 +9,13 @@ import cv2
 import random
 import torch
 import sys
-sys.path.append('/notebooks/AniPortrait')
+
+if os.path.exists('/notebooks'):
+    sys.path.append('/notebooks/AniPortrait')
+elif os.path.exists('/content'):
+    sys.path.append('/content/AniPortrait')
+else:
+    raise EnvironmentError("Unknown environment. Please check the paths.")
 
 from diffusers import AutoencoderKL, DDIMScheduler
 from einops import repeat
