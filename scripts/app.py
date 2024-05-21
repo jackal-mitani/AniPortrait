@@ -479,7 +479,7 @@ def audio2video(input_audio, ref_img, headpose_video=None, size=512, steps=25, l
   if length == 0 or length > len(pose_images):
     args_L = len(pose_images)
   else:
-    args_L = length * fps
+    args_L = int(length * fps)
 
   for pose_image_np in pose_images[: args_L : fi_step]:
 
@@ -648,7 +648,7 @@ def video2video(ref_img, source_video, size=512, steps=25, length=60, seed=42, a
   if length == 0:
     args_L = len(source_images)
   else:
-    args_L = length * src_fps
+    args_L = int(length * src_fps)
 
   for src_image_pil in source_images[: args_L : step*fi_step]:
 
@@ -844,8 +844,7 @@ def audio2video_async(input_audio, ref_img, headpose_video, size, steps, length,
 
   except Exception as e:
 
-    progress.error(str(e))
-
+    progress(1.0, desc=f"Error: {str(e)}")
     raise e
 
 
@@ -864,8 +863,7 @@ def video2video_async(ref_img, source_video, size, steps, length, seed, acc_flag
 
   except Exception as e:
 
-    progress.error(str(e))
-
+    progress(1.0, desc=f"Error: {str(e)}")
     raise e
 
 
@@ -1039,4 +1037,3 @@ with gr.Blocks() as demo:
 demo.queue() # Enable queuing
 
 demo.launch(share=True)
-
