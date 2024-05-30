@@ -228,7 +228,7 @@ def get_headpose_temp(input_video):
 
   total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
-  fps = cap.get(cv2.CAP_PROP.FPS)  
+  fps = cap.get(cv2.CAP_PROP_FPS)  
 
 
 
@@ -894,11 +894,11 @@ with gr.Blocks() as demo:
 
         with gr.Row():
 
-          a2v_input_audio = gr.Audio(sources=["upload", "microphone"], type="filepath", editable=True, label="Input audio", interactive=True)
+          a2v_input_audio = gr.Audio(sources=["upload", "microphone"], type="filepath", label="Input audio", interactive=True)
 
-          a2v_ref_img = gr.Image(label="Upload reference image", sources="upload")
+          a2v_ref_img = gr.Image(label="Upload reference image")
 
-          a2v_headpose_video = gr.Video(label="Option: upload head pose reference video", sources="upload")
+          a2v_headpose_video = gr.Video(label="Option: upload head pose reference video")
 
 
 
@@ -956,9 +956,9 @@ with gr.Blocks() as demo:
 
         with gr.Row():
 
-          v2v_ref_img = gr.Image(label="Upload reference image", sources="upload")
+          v2v_ref_img = gr.Image(label="Upload reference image")
 
-          v2v_source_video = gr.Video(label="Upload source video", sources="upload")
+          v2v_source_video = gr.Video(label="Upload source video")
 
          
 
